@@ -1,5 +1,5 @@
 #!/bin/bash
-basedir="/home/iasatan/NonSynced/linuxScripts/mp3";
+basedir="/home/iasatan/Downloads/MP3Filter";
 if [[ $(grep -c "$PWD##*/" "$basedir"/stored.txt) -lt 1 ]]; then
     echo "removeNonMusic-------------------------------------------------------------------------"
     bash $basedir/removeNonMusic.sh

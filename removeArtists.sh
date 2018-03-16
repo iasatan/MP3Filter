@@ -6,7 +6,7 @@ function delete {
 }
 function check {
 	artist=$(mp3infov2 -p %a "$1")
-	return $(grep -cix "$artist" /home/iasatan/NonSynced/linuxScripts/mp3/artists.txt)
+	return $(grep -cix "$artist" /home/iasatan/Downloads/MP3Filter/artists.txt)
 }
 function iterate {
 	for f in "."/*

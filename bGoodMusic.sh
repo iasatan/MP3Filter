@@ -3,7 +3,7 @@
 function add {
 	artist=$(mp3infov2 -p %a "$1")
 	title=$(mp3infov2 -p %t "$1")
-	echo "$title"  >>/home/iasatan/NonSynced/linuxScripts/mp3/goodMusic/"$artist".txt
+	echo "$title"  >> /home/iasatan/Downloads/MP3Filter/goodMusic/"$artist".txt
     echo "$title"
 }
 
@@ -22,4 +22,4 @@ function iterate {
 find . -type d -empty -delete -print
 iterate
 directory=${PWD##*/}
- echo "$directory" >> /home/iasatan/NonSynced/linuxScripts/mp3/storedGood.txt
+ echo "$directory" >> /home/iasatan/Downloads/MP3Filter/storedGood.txt

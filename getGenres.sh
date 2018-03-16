@@ -2,12 +2,12 @@
 
 function add {
 	genre=$(mp3infov2 -p %g "$1")
-	echo "$genre"  >> /home/iasatan/NonSynced/linuxScripts/mp3/goodGenres.txt
+	echo "$genre"  >> /home/iasatan/Downloads/MP3Filter/goodGenres.txt
 }
 
 function check {
 	genre=$(mp3infov2 -p %g "$1")
-	echo $(grep -c "$genre" /home/iasatan/NonSynced/linuxScripts/mp3/goodGenres.txt)
+	echo $(grep -c "$genre" /home/iasatan/Downloads/MP3Filter/goodGenres.txt)
 }
 
 function iterate {
