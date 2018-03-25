@@ -13,3 +13,5 @@ find . -type f -iname \*"(live"* -delete -print
 find . -type f -iname \*"live)"* -delete -print
 find . -type f -iname \*"(version"* -delete -print
 find . -type f -iname \*"version)"* -delete -print
+find . -type f -iname \*"( version"* -delete -print
+find . -type f -iname \*"version )"* -delete -print

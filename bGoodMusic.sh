@@ -21,5 +21,3 @@ function iterate {
 }
 find . -type d -empty -delete -print
 iterate
-directory=${PWD##*/}
- echo "$directory" >> /home/iasatan/Downloads/MP3Filter/storedGood.txt
