@@ -15,3 +15,7 @@ find . -type f -iname \*"(version"* -delete -print
 find . -type f -iname \*"version)"* -delete -print
 find . -type f -iname \*"( version"* -delete -print
 find . -type f -iname \*"version )"* -delete -print
+find . -type f -iname \*"(remastered"* -delete -print
+find . -type f -iname \*"remastered)"* -delete -print
+find . -type f -iname \*"( remastered"* -delete -print
+find . -type f -iname \*"remastered )"* -delete -print
