@@ -19,3 +19,7 @@ find . -type f -iname \*"(remastered"* -delete -print
 find . -type f -iname \*"remastered)"* -delete -print
 find . -type f -iname \*"( remastered"* -delete -print
 find . -type f -iname \*"remastered )"* -delete -print
+find . -type f -iname \*"(Remastered"* -delete -print
+find . -type f -iname \*"Remastered)"* -delete -print
+find . -type f -iname \*"( Remastered"* -delete -print
+find . -type f -iname \*"Remastered )"* -delete -print
