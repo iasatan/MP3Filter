@@ -16,3 +16,5 @@ sugardrunkhigh
 standup
 fadeout
 slide
+confirmationtargetbonustrack
+youngheartsinthedarktargetbonustrack
