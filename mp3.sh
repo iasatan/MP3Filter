@@ -11,6 +11,12 @@ if [[ $(grep -c "$PWD##*/" "$basedir"/stored.txt) -lt 1 ]]; then
     bash "$basedir"/removeArtists.sh
     echo "Remove Bad Genres-------------------------------------------------------------------------"
     bash "$basedir"/removeBadGenres.sh
+    echo "classify new artists"
+    bash "$basedir"/checkArtist.sh
+    echo "removeArtists-------------------------------------------------------------------------"
+    bash "$basedir"/removeArtists2.sh "$basedir"/artists.txt
+    echo "removeArtists2-------------------------------------------------------------------------"
+    bash "$basedir"/removeArtists.sh
     echo "removeDuplicates-------------------------------------------------------------------------"
     bash "$basedir"/removeDuplicates.sh
     echo "removeEmptyDirs-------------------------------------------------------------------------"
