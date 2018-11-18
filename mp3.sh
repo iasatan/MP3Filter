@@ -2,13 +2,15 @@
 basedir="/home/iasatan/Downloads/MP3Filter";
 if [[ $(grep -c "$PWD##*/" "$basedir"/stored.txt) -lt 1 ]]; then
     echo "removeNonMusic-------------------------------------------------------------------------"
-    bash $basedir/removeNonMusic.sh
+    bash "$basedir"/removeNonMusic.sh
+    echo "remove unoriginal music-------------------------------------------------------------------------"
+    bash "$basedir"/removeUnoriginalMusic.sh
     echo "removeArtists-------------------------------------------------------------------------"
     bash "$basedir"/removeArtists2.sh "$basedir"/artists.txt
 	echo "removeShortOrLongMusic-------------------------------------------------------------------------"
     bash "$basedir"/removeShortOrLongSongs.sh
     echo "removeArtists2-------------------------------------------------------------------------"
-    bash "$basedir"/removeArtists.sh
+    bash "$basedir"/removeArtists3.sh
     echo "Remove Bad Genres-------------------------------------------------------------------------"
     bash "$basedir"/removeBadGenres.sh
     echo "classify new artists"
@@ -16,7 +18,7 @@ if [[ $(grep -c "$PWD##*/" "$basedir"/stored.txt) -lt 1 ]]; then
     echo "removeArtists-------------------------------------------------------------------------"
     bash "$basedir"/removeArtists2.sh "$basedir"/artists.txt
     echo "removeArtists2-------------------------------------------------------------------------"
-    bash "$basedir"/removeArtists.sh
+    bash "$basedir"/removeArtists3.sh
     echo "removeDuplicates-------------------------------------------------------------------------"
     bash "$basedir"/removeDuplicates.sh
     echo "removeEmptyDirs-------------------------------------------------------------------------"
