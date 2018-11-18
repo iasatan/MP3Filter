@@ -5,6 +5,10 @@ function add {
 	echo "$artist"
 	echo "$artist"  >> /home/iasatan/Downloads/MP3Filter/everyArtist.txt
     xdg-open "http://www.google.com/search?q=%20$artist"
+    read delete
+    if [[ "$delete" == "y" ]]; then
+    	echo "$artist" >> /home/iasatan/Downloads/MP3Filter/artists.txt
+    fi
 
 }
 
