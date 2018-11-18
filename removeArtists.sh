@@ -6,7 +6,7 @@ function delete {
 }
 function check {
 	artist=$(mp3infov2 -p %a "$1")
-	return $(grep -cix "$artist" /home/iasatan/Downloads/MP3Filter/artists.txt)
+	grep -q "$artist" /home/iasatan/Downloads/MP3Filter/everyArtist.txt ; echo $?	
 }
 function iterate {
 	for f in "."/*
@@ -16,7 +16,9 @@ function iterate {
 			iterate
 			cd ..
 		elif [[ -f "$f" ]]; then
-			check "$f" || delete "$f"
+			if [[ $(check "$f") -eq 0 ]]; then
+					delete "$f"
+				fi
 		fi
 	done
 }
