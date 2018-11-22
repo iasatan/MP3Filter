@@ -1,2 +1,0 @@
-strobe
-nyquist
