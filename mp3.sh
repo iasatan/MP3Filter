@@ -25,7 +25,7 @@ if [[ $(grep -c "$PWD##*/" "$basedir"/stored.txt) -lt 1 ]]; then
     find . -type d -empty -delete -print
     directory=${PWD##*/}
     echo "$directory" >> "$basedir"/stored.txt
-    cd "$basedir"
+    cd "$basedir/MP3Library"
     echo "commiting to git"
     git pull
     git add .

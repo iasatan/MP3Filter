@@ -3,7 +3,7 @@
 function add {
 	artist=$(mp3infov2 -p %a "$1")
 	title=$(mp3infov2 -p %t "$1")
-	echo "$title"  >> /home/iasatan/Downloads/MP3Filter/goodMusic/"$artist".txt
+	echo "$title"  >> /home/iasatan/Downloads/MP3Filter/MP3Library/goodMusic/"$artist".txt
     echo "$title"
 }
 
