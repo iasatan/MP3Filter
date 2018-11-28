@@ -8,6 +8,8 @@ function add {
     read delete
     if [[ "$delete" == "y" ]]; then
     	echo "$artist" >> /home/iasatan/Downloads/MP3Filter/artists.txt
+    	echo "$artist" >> /home/iasatan/Downloads/MP3Filter/tempBadArtists.txt
+    	
     fi
 
 }
