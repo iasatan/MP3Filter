@@ -1,4 +1,5 @@
 #!/bin/bash
+basedir=$1
 function delete {
 	artist=$(mp3infov2 -p %a "$@")
 	echo "removed bad artist" "$artist"
@@ -6,7 +7,7 @@ function delete {
 }
 function check {
 	artist=$(mp3infov2 -p %a "$1")
-	grep -q "$artist" /home/iasatan/Downloads/MP3Filter/artists.txt ; echo $?	
+	grep -q "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
 }
 function iterate {
 	for f in "."/*

@@ -6,7 +6,7 @@ function delete {
 }
 function check {
 	artist=$(mp3infov2 -p %a "$1")
-	grep -q "$artist" /home/iasatan/Downloads/MP3Filter/tempBadArtists.txt ; echo $?	
+	grep -q "$artist" /tmp/tempBadArtists.txt ; echo $?	
 }
 function iterate {
 	for f in "."/*

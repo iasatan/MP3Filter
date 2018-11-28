@@ -1,5 +1,7 @@
 #!/bin/bash
 
+basedir=$1
+
 function add {
 	artist=$(mp3infov2 -p %a "$1")
 	title=$(mp3infov2 -p %t "$1")
@@ -12,7 +14,7 @@ function add {
 	 fi
 	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
 	title=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
-	echo "$title"  >> /home/iasatan/Downloads/MP3Filter/MP3Library/Music/"$artist".txt
+	echo "$title"  >> "$basedir"/MP3Library/Music/"$artist".txt
 }
 
 function delete {
@@ -28,7 +30,7 @@ function check {
 	title=$(mp3infov2 -p %t "$1")
 	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
 	title=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
-	echo $(grep -c "$title" /home/iasatan/Downloads/MP3Filter/MP3Library/Music/"$artist".txt)
+	echo $(grep -c "$title" "$basedir"/MP3Library/Music/"$artist".txt)
 }
 
 function iterate {

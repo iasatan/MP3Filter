@@ -1,5 +1,7 @@
 #!/bin/bash
 
+basedir=$1
+
 function delete {
 	genre=$(mp3infov2 -p %g "$@")
 	if ! [[ -z "$genre" ]]; then
@@ -10,7 +12,7 @@ function delete {
 function check {
 	genre=$(mp3infov2 -p %g "$1")
 	genre=$(echo "$genre" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
-    return $(grep -ci "$genre" /home/iasatan/Downloads/MP3Filter/badGenres.txt)
+    return $(grep -ci "$genre" "$basedir"/MP3Library/badGenres.txt)
 }
 
 function iterate {
@@ -26,3 +28,4 @@ function iterate {
 		done
 }
 iterate
+
