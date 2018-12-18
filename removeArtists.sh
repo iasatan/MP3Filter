@@ -8,7 +8,7 @@ function delete {
 function check {
 	artist=$(mp3infov2 -p %a "$1")
 	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | awk -F '.feat' '{print $1}')
-	grep -q "$artist" "$basedir"/MP3Library/betaArtists2.txt ; echo $?	
+	grep -q "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
 }
 function iterate {
 	for f in "."/*
