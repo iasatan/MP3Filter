@@ -76,6 +76,7 @@ function iterate {
 			cd ..
 		elif [[ -f "$f" ]]; then
 			artist=$(mp3infov2 -p %a "$f")
+			artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | awk -F '.feat' '{print $1}')
 			if [[ $(check "$artist") -eq 1 ]]; then
 				add "$artist"
 			fi

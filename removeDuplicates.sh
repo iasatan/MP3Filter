@@ -12,7 +12,7 @@ function add {
 	 	 	title="${music[1]}"
 	 	 fi
 	 fi
-	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
+	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]' | awk -F '.feat' '{print $1}')
 	title=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
 	echo "$title"  >> "$basedir"/MP3Library/Music/"$artist".txt
 }
@@ -28,7 +28,7 @@ function delete {
 function check {
 	artist=$(mp3infov2 -p %a "$1")
 	title=$(mp3infov2 -p %t "$1")
-	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
+	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]' | awk -F '.feat' '{print $1}')
 	title=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -dc '[:alpha:]')
 	echo $(grep -c "$title" "$basedir"/MP3Library/Music/"$artist".txt)
 }
