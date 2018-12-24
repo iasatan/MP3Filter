@@ -29,7 +29,7 @@ sort -u everyArtist.txt > tempEveryArtists.txt
 rm everyArtist.txt
 mv tempEveryArtists.txt everyArtist.txt
 echo "commiting to git"
-git pull
+#git pull
 git add .
 git commit -m "$directory"" added"
 git push
