@@ -43,7 +43,7 @@ function add {
 			artistName=$(echo "$artistName" | tr -d '\n')
 			if [[ $(checkBad "$artistName") -eq 0 ]]; then
 				store "$artist"
-				echo "bad artists"
+				echo "bad artists: $artistName"
 				break
 			elif [[ $(check "$artistName") -eq 1 ]]; then
 				echo "$artistName"
@@ -100,11 +100,11 @@ function add {
 #The exit status is 1 (false) if the pattern was not found.
 function check {
 	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-	grep -q "$artist" "$basedir"/MP3Library/everyArtist.txt ; echo $?	
+	grep -qx "$artist" "$basedir"/MP3Library/everyArtist.txt ; echo $?	
 }
 function checkBad {
 	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-	grep -q "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
+	grep -qx "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
 }
 
 

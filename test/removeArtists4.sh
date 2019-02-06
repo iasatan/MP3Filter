@@ -3,12 +3,24 @@ basedir=$1
 function delete {
 	artist=$(mp3infov2 -p %a "$@")
 	echo "removed bad artist" "$artist"
-	rm -f "$@"
+	#rm -f "$@"
+}
+function checkBad {
+	grep -q "$1" "$basedir"/MP3Library/artists.txt ; echo $?	
 }
 function check {
 	artist=$(mp3infov2 -p %a "$1")
 	artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]' | awk -F '.feat' '{print $1}')
-	grep -qx "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
+	readarray -td, a <<<"$artist"; declare -p a;
+		for artistName in "${a[@]}"
+		do
+			artistName=$(echo "$artistName" | xargs)
+			artistName=$(echo "$artistName" | tr -d '\n')
+			if [[ $(checkBad "$artistName") -eq 0 ]]; then
+				return 0;
+			fi
+		done
+	grep -q "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
 }
 function iterate {
 	for f in "."/*
