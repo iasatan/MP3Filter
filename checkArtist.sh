@@ -2,6 +2,21 @@
 
 basedir=$1
 
+#The exit status is 0 (true) if the pattern was found;
+#The exit status is 1 (false) if the pattern was not found.
+function check {
+	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	grep -qx "$artist" "$basedir"/MP3Library/everyArtist.txt ; echo $?	
+}
+function checkBad {
+	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	grep -qx "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
+}
+function checkNewBad {
+	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	grep -qx "$artist" /tmp/tempBadArtists.txt ; echo $?	
+}
+
 function containsElement () {
   local e match="$1"
   shift
@@ -27,8 +42,49 @@ function store {
 	echo "$artist" >> /tmp/tempBadArtists.txt
 	echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
 }
-function arrayArtists {
 
+function checkBadArray {
+	local arr="$1"
+	for artistName in "${arr[@]}"
+	do
+		artistName=$(echo "$artistName" | xargs)
+		artistName=$(echo "$artistName" | tr -d '\n')
+		if [[ $(checkBad "$artistName") -eq 0 ]]; then
+			store "$1"
+			echo "bad artists: $artistName ........."
+			break
+		fi
+		if [[ $(checkNewBad "$artistName") -eq 0 ]]; then
+			store "$1"
+			echo "bad artists: $artistName ........."
+			break
+		fi
+	done
+}
+
+function arrayArtists {
+	readarray -td, a <<<"$1"; declare -p a;
+	checkBadArray "${a[@]}"
+	for artistName in "${a[@]}"
+	do
+		artistName=$(echo "$artistName" | xargs)
+		artistName=$(echo "$artistName" | tr -d '\n')
+		if [[ $(check "$artistName") -eq 1 ]]; then
+			echo "$artistName"
+			echo "y for search, a for add"
+			read userInput
+			if [[ "$userInput" == "y" ]]; then
+				google "$artistName"
+			elif [[ "$userInput" == "a" ]]; then
+				store "$artistName"
+			else
+				artistName=$(echo "$artistName" | tr '[:upper:]' '[:lower:]')
+				echo "$artistName"  >> "$basedir"/MP3Library/everyArtist.txt
+			fi
+		fi
+	done
+	checkBadArray "${a[@]}"
+	echo "$1"  >> "$basedir"/MP3Library/everyArtist.txt
 }
 function add {
 	artist="$1"
@@ -38,30 +94,7 @@ function add {
 	if [[ "$userInput" == "y" ]]; then
 		google "$artist"
 	elif [[ "$userInput" == "s" ]]; then
-		readarray -td, a <<<"$artist"; declare -p a;
-		for artistName in "${a[@]}"
-		do
-			artistName=$(echo "$artistName" | xargs)
-			artistName=$(echo "$artistName" | tr -d '\n')
-			if [[ $(checkBad "$artistName") -eq 0 ]]; then
-				store "$artist"
-				echo "bad artists: $artistName"
-				break
-			elif [[ $(check "$artistName") -eq 1 ]]; then
-				echo "$artistName"
-				echo "y for search, a for add"
-				read userInput
-				if [[ "$userInput" == "y" ]]; then
-					google "$artistName"
-				elif [[ "$userInput" == "a" ]]; then
-					store "$artistName"
-				else
-					artistName=$(echo "$artistName" | tr '[:upper:]' '[:lower:]')
-					echo "$artistName"  >> "$basedir"/MP3Library/everyArtist.txt
-				fi
-			fi
-		done
-		echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
+		arrayArtists "$artist"		
 	elif [[ "$userInput" == "a" ]]; then
 		store "$artist"
 	elif [[ "$userInput" == "x" ]]; then
@@ -72,16 +105,7 @@ function add {
 	fi
 }
 
-#The exit status is 0 (true) if the pattern was found;
-#The exit status is 1 (false) if the pattern was not found.
-function check {
-	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-	grep -qx "$artist" "$basedir"/MP3Library/everyArtist.txt ; echo $?	
-}
-function checkBad {
-	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-	grep -qx "$artist" "$basedir"/MP3Library/artists.txt ; echo $?	
-}
+
 
 
 function iterate {
