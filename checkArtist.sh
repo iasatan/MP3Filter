@@ -27,7 +27,9 @@ function store {
 	echo "$artist" >> /tmp/tempBadArtists.txt
 	echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
 }
+function arrayArtists {
 
+}
 function add {
 	artist="$1"
 	echo "$artist"
@@ -44,32 +46,6 @@ function add {
 			if [[ $(checkBad "$artistName") -eq 0 ]]; then
 				store "$artist"
 				echo "bad artists: $artistName"
-				break
-			elif [[ $(check "$artistName") -eq 1 ]]; then
-				echo "$artistName"
-				echo "y for search, a for add"
-				read userInput
-				if [[ "$userInput" == "y" ]]; then
-					google "$artistName"
-				elif [[ "$userInput" == "a" ]]; then
-					store "$artistName"
-				else
-					artistName=$(echo "$artistName" | tr '[:upper:]' '[:lower:]')
-					echo "$artistName"  >> "$basedir"/MP3Library/everyArtist.txt
-				fi
-			fi
-		done
-		echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
-	elif [[ "$userInput" == "sa" ]]; then
-		set -f                      # avoid globbing (expansion of *).
-		array=(${artist//&/ })
-		for artistName in "${artist[@]}"
-		do
-			artistName=$(echo "$artistName" | xargs)
-			artistName=$(echo "$artistName" | tr -d '\n')
-			if [[ $(checkBad "$artistName") -eq 0 ]]; then
-				store "$artist"
-				echo "bad artists"
 				break
 			elif [[ $(check "$artistName") -eq 1 ]]; then
 				echo "$artistName"
