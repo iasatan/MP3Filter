@@ -44,8 +44,8 @@ function store {
 }
 
 function checkBadArray {
-	local arr="$1"
-	for artistName in "${arr[@]}"
+	readarray -td, a <<<"$1"; declare -p a;
+	for artistName in "${a[@]}"
 	do
 		artistName=$(echo "$artistName" | xargs)
 		artistName=$(echo "$artistName" | tr -d '\n')
@@ -64,8 +64,9 @@ function checkBadArray {
 
 function arrayArtists {
 	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	
+	checkBadArray "${artist}"
 	readarray -td, a <<<"$artist"; declare -p a;
-	checkBadArray "${a[@]}"
 	for artistName in "${a[@]}"
 	do
 		artistName=$(echo "$artistName" | xargs)
@@ -84,7 +85,7 @@ function arrayArtists {
 			fi
 		fi
 	done
-	checkBadArray "${a[@]}"
+	checkBadArray "${artist}"
 	echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
 }
 function add {
