@@ -26,7 +26,9 @@ function containsElement () {
 
 function google {
 	xdg-open "http://www.google.com/search?q=%20$1"
-	read delete
+	echo ""
+	read -n1 delete
+	echo ""
 	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 	if [[ "$delete" == "y" ]]; then
 		echo "$artist" >> "$basedir"/MP3Library/artists.txt
@@ -64,7 +66,6 @@ function checkBadArray {
 
 function arrayArtists {
 	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-	
 	checkBadArray "${artist}"
 	readarray -td, a <<<"$artist"; declare -p a;
 	for artistName in "${a[@]}"
@@ -74,7 +75,8 @@ function arrayArtists {
 		if [[ $(check "$artistName") -eq 1 ]]; then
 			echo "$artistName"
 			echo "y for search, a for add"
-			read userInput
+			read -n1 userInput
+			echo ""
 			if [[ "$userInput" == "y" ]]; then
 				google "$artistName"
 			elif [[ "$userInput" == "a" ]]; then
@@ -92,7 +94,8 @@ function add {
 	artist="$1"
 	echo "$artist"
 	echo "y for search, s for split, a for add"
-	read userInput
+	read -n1 userInput
+	echo ""
 	if [[ "$userInput" == "y" ]]; then
 		google "$artist"
 	elif [[ "$userInput" == "s" ]]; then
