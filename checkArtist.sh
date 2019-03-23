@@ -63,7 +63,8 @@ function checkBadArray {
 }
 
 function arrayArtists {
-	readarray -td, a <<<"$1"; declare -p a;
+	artist=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	readarray -td, a <<<"$artist"; declare -p a;
 	checkBadArray "${a[@]}"
 	for artistName in "${a[@]}"
 	do
@@ -84,7 +85,7 @@ function arrayArtists {
 		fi
 	done
 	checkBadArray "${a[@]}"
-	echo "$1"  >> "$basedir"/MP3Library/everyArtist.txt
+	echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
 }
 function add {
 	artist="$1"
