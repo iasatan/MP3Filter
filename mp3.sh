@@ -4,6 +4,7 @@ bash "$basedir"/removeBad.sh
 echo "removeDuplicates-------------------------------------------------------------------------"
 bash "$basedir"/removeDuplicates.sh "$basedir"
 echo "commiting to git"
+cd "$basedir/MP3Library"
 #git pull
 git add .
 git commit -m "$directory"" added"
