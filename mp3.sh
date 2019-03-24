@@ -1,7 +1,10 @@
 #!/bin/bash
 basedir="/home/iasatan/Downloads/MP3Filter";
+bash "$basedir"/removeBad.sh
 echo "removeDuplicates-------------------------------------------------------------------------"
 bash "$basedir"/removeDuplicates.sh "$basedir"
-
-bash "$basedir"/removeBad.sh
-
+echo "commiting to git"
+#git pull
+git add .
+git commit -m "$directory"" added"
+git push

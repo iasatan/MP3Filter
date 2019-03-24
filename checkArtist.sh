@@ -93,20 +93,24 @@ function arrayArtists {
 function add {
 	artist="$1"
 	echo "$artist"
-	echo "y for search, s for split, a for add"
-	read -n1 userInput
-	echo ""
-	if [[ "$userInput" == "y" ]]; then
-		google "$artist"
-	elif [[ "$userInput" == "s" ]]; then
-		arrayArtists "$artist"		
-	elif [[ "$userInput" == "a" ]]; then
-		store "$artist"
-	elif [[ "$userInput" == "x" ]]; then
-		echo ""
+	if [[ "$artist" == *,* ]]; then
+		arrayArtists "$artist"
 	else
-		artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]')
-		echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
+		echo "y for search, s for split, a for add"
+		read -n1 userInput
+		echo ""
+		if [[ "$userInput" == "y" ]]; then
+			google "$artist"
+		#elif [[ "$userInput" == "s" ]]; then
+		#	arrayArtists "$artist"		
+		elif [[ "$userInput" == "a" ]]; then
+			store "$artist"
+		elif [[ "$userInput" == "x" ]]; then
+			echo ""
+		else
+			artist=$(echo "$artist" | tr '[:upper:]' '[:lower:]')
+			echo "$artist"  >> "$basedir"/MP3Library/everyArtist.txt
+		fi
 	fi
 }
 
