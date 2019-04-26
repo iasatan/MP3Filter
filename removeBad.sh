@@ -21,7 +21,6 @@ echo "removeArtists2------------------------------------------------------------
 bash "$basedir"/removeArtists3.sh
 echo "removeEmptyDirs-------------------------------------------------------------------------"
 find . -type d -empty -delete -print
-directory=${PWD##*/}
 cd "$basedir/MP3Library"
 sort -u everyArtist.txt > tempEveryArtists.txt
 rm everyArtist.txt
